@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const { cart } = useSelector((state) => state.AllCarts);
   return (
     <nav className="flex items-center justify-between px-6 py-3 shadow-md bg-white">
       {/* Logo */}
@@ -22,9 +24,13 @@ const Header = () => {
       </div>
 
       {/* Cart Button */}
-      <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-        Cart
-      </button>
+      <Link
+        to="/cart"
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+      >
+        Cart :{" "}
+        <span className=" text-lg font-bold text-black"> {cart.length} </span>
+      </Link>
     </nav>
   );
 };

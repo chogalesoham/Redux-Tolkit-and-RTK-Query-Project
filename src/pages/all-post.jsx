@@ -3,11 +3,13 @@ import {
   useGetAllUsersQuery,
   useDeleteNewUserMutation,
 } from "../redux/features/users-ApiSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/features/cartSlice";
 
 const AllPost = () => {
   const { data, isError, isLoading } = useGetAllUsersQuery();
   const [deletePost] = useDeleteNewUserMutation();
-
+  const dispatch = useDispatch();
   return (
     <div className="max-w-6xl mx-auto mt-10 px-4">
       <h1 className="text-2xl font-bold text-gray-900 mb-6 text-center">
@@ -54,7 +56,10 @@ const AllPost = () => {
                   >
                     Delete
                   </button>
-                  <button className="bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700 transition w-full">
+                  <button
+                    onClick={() => dispatch(addToCart(post))}
+                    className="bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700 transition w-full"
+                  >
                     Add to Cart
                   </button>
                 </div>
